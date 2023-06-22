@@ -1,0 +1,43 @@
+{% extends 'shop/main.html' %}
+
+{% block content %}
+
+  <section>
+    <div class="container-lg">
+        
+            <div class="row ">
+                <h3 class="display-4 text-center fw-bold">Browse by Categories</h3>
+                {% for category in categories %}
+                {%if category.products.all.exists %}
+                <h2 class="display-2 text-center">{{category}}</h2>
+                   <div class="container d-flex justify-content-center align-items-center border border-2">
+                        {% for categoryprod in category.products.all %}
+                          
+                          <div class="card m-4 border">
+                            <img src="{{categoryprod.imageURL}}" alt="" class=" img-top rounded img-fluid m-auto flex-fill" style="max-height: 100px;">
+                            <div class="card-header text-muted">
+                            
+                                {{categoryprod.product_name}}
+                                
+                          
+                            </div>
+                            <div class="card-body">
+                                <a href="{% url 'shop:sellerDetail' categoryprod.seller.id %}" class=" btn btn-sm btn-primary  text-center m-auto rounded-pill">Visit seller</a>
+
+                                </div>
+                            
+                          </div>
+                       
+                       {% endfor %}
+
+                       {% else %}
+                    
+                      {% endif %}
+                   </div>
+                {% endfor %}
+            </div>
+        
+    </div>
+  </section>
+
+{% endblock %}

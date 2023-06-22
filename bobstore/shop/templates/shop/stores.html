@@ -1,0 +1,16 @@
+{% extends 'shop/main.html' %}
+<div>
+
+</div>
+{% block content %}
+<div>
+   
+    {% for seller in sellers %}
+       <div>
+         <p>{{forloop.counter}} <a href="{% url 'shop:sellerDetail' seller.id%}">{{seller}}</a></p>
+          <span><img src="{{seller.imageURL}}" style="width:100px;"/></span>
+       </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

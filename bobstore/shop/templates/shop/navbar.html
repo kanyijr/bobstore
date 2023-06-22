@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navabr-light">
+  {% load static %}
+  <div class="container-fluid ">
+    <a href="{% url 'shop:index' %}" class="navbar-brand ">CONSEGNI</a>
+    <button class="btn navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="navbar-nav collapse navbar-collapse float-end ms-auto" id="navigation">
+      <li class="nav-item "><a href="{% url 'shop:index' %}" class="nav-link {%if page == 'home' %} active border border-2 rounded {% endif %} ">Home</a></li>
+      <li class="nav-item"><a href="{% url 'shop:stores' %}" class="nav-link">explore</a></li>
+      <li class="nav-item "><a href="{% url 'shop:cart' %}" class="nav-link {%if page == 'cart' %} active border border-2 rounded {% endif %}">cart</a></li>
+      
+      <li class="dropdown">
+        <button  class="btn dropdown-toggle nav-link" data-bs-toggle="dropdown">settings</button>
+        <ul class="dropdown-menu">
+          {% if request.user.is_authenticated %}
+            <li class="dropdown-header fw-bold">Profile</li>
+            <li class="dropdown-item"><a href="{% url 'shop:profile' %}" class="nav-link {%if page == 'profile' %} active border border-2{% endif %}">Visit profile <span><i class="bi bi-arrow-right"></i></span></a></li>
+            <li class="dropdown-item" ><a href="{% url 'shop:logout' %}" class="nav-link">logout</a></li>
+          {% else %}
+             <li class="dropdown-item"><a href="{% url 'shop:login' %}" class="nav-link">login</a></li>  
+          {% endif %}     
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+
+</nav>
+
+
+
+
+
+<!--<div class="nav-container">
+    <div>
+      <nav>
+        {% load static %}
+        <span style="font-size: 50px;">Consegni</span>
+        <a href="{% url 'shop:index' %}"><img src="{% static 'shop/images/shoegallore.jpeg' %}" style="width: 100px;"/></a>
+        <hr>
+      </nav>
+    </div>
+    <div>
+        {% if request.user.is_authenticated %}
+           <a href="{% url 'shop:logout' %}">logout</a>
+           <a href="{% url 'shop:cart'  %}">cart</a>
+           <span style="font-weight: bold;">{{request.user.username}}</span>
+
+        {% else %}
+           <a href="{% url 'shop:login' %}">Login</a>   
+           
+        {% endif %}
+    </div>
+</div>-->

@@ -1,0 +1,38 @@
+{% extends 'shop/main.html' %}
+{% block content %}
+   <div>
+       
+       <form action="" method="post">
+        {% csrf_token %}
+        <div class="form w-50 mx-auto rounded my-3">
+            {% if messages %}
+           
+            {% for message in messages %}
+            <div class="alert alert-dismissible">
+                {{message}}
+                <button class="btn btn-dismiss" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+         
+           {% endif %}
+           
+           <h2 class="dislpay-4 text-center fw-bold">Signup</h2>
+           <div class="my-3 p-3">
+             <label for="{{form.username.id_for_label}}" class="form-label">Username: </label>
+             {{form.username}}
+           </div>
+           <div class="my-3 p-3 ">
+             <label for="{{form.password1.id_for_label}}" class="form-label">Password: </label>
+             {{form.password}}
+           </div>
+           <div class="my-3 p-3">
+            <label for="{{form.password2.id_for_label}}" class="form-label">Confirm Password: </label>
+            <input type="password" name="pass2" id="pass2" class="form-control">
+          </div>
+          <input class="btn btn-primary w-auto rounded text-center ms-3 me-3" type="submit" value="signup">
+      
+        </div>           
+       </form>
+       <p class="text-muted text-center mt-3">Already have an account?<a href="{% url 'shop:login' %}" class="fw-bold">Login</a></p>
+   </div>
+{% endblock %}   

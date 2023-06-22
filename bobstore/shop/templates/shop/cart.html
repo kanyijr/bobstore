@@ -1,0 +1,37 @@
+{% extends 'shop/main.html' %}
+{% block content %}
+<div>
+    <a href="{{request.META.HTTP_REFERER }}" class="btn btn-secondary my-2 rounded-pill btn-sm "><i class="bi bi-arrow-left"></i><span><small class="mx-1"> Go back</small></span></a>
+    <h2 class="display-5 fw-bold text-center my-1">Cart <span><i class="bi bi-cart3"></i></span></h2>
+    <div class="cart-summary d-flex justify-content-between align-items-center mx-3 my-4">
+         <strong>items: {{order.get_cart_items}}</strong>  <strong>Total: Sh. {{order.get_cart_total}}</strong>
+    </div>
+    <div class="cart-content">
+        <table class="table p-3 table-hover m-3">
+        <thead>
+           <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th class="d-none d-md-block">vendor</th>
+           </tr>
+        </thead>
+        <tbody>
+        {% for item in order_items %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{item.product.product_name}}</td>
+            <td class="mx-1" id="{{forloop.counter}}">{{item.quantity}} <span class="d-inline mx-0"><i class=" cart-amount bi bi-chevron-up btn " data-product = "{{item.id}}" data-action="cart-up" data-id="{{forloop.counter}}" type="submit"></i> <i class=" cart-amount bi bi-chevron-down  btn " data-product = "{{item.id}}" data-action="cart-down" data-id="{{forloop.counter}}" type="submit"></span></td>
+            <td >{{item.total}} <span class="mx-2 "></span></td>
+            <td ><div class="d-none d-md-block">{{item.product.seller.store_name}}<span ><i class="bi bi-patch-check d-none d-md-block"></i><button class=" btn btn-sm btn-secondary btn-close mx-2 float-end me-4 cart-remove my-auto text-center " data-product="{{item.id}}" data-action="cart-close"> </button></span></div></td>
+          </tr>
+        
+        {% endfor %}
+        </tbody>
+        </table>
+        <a href="{% url 'shop:checkout' %}" class="btn btn-primary rounded-pill float-end {%if order.get_cart_total == 0%} d-none{% endif %}">checkout <span><i class="bi bi-arrow-right"></i></span></a>
+    </div>
+</div>
+
+{% endblock%}

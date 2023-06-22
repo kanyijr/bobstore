@@ -1,0 +1,44 @@
+{% extends 'shop/main.html' %}
+{% block content %}
+   <div>
+       
+       <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form w-50 mx-auto  p-4 rounded" >
+            {% if messages %}
+           
+            {% for message in messages %}
+            <div class="alert alert-dismissible">
+                {{message}}
+                <button class="btn btn-dismiss" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+         
+           {% endif %}
+           <h2 class="dislpay-4 text-center fw-bold">Profile</h2>
+           <div class="my-3 p-3">
+             <label for="{{form.firstname.id_for_label}}" class="form-label">Firstname: </label>
+             {{form.firstname}}
+           </div>
+           <div class="my-3 p-3 ">
+             <label for="{{form.lastname.id_for_label}}" class="form-label">lastname: </label>
+             {{form.lastname}}
+           </div>
+           <div class="my-3 p-3">
+            <label for="{{form.profile_pic.id_for_label}}" class="form-label">Profile Pic: </label>
+            {{form.profile_pic}}
+          </div>
+          <div class="my-3 p-3">
+            <label for="{{form.email.id_for_label}}" class="form-label">Email: </label>
+            {{form.email}}
+          </div>
+           
+           
+           
+           <input type="submit" value="Complete" class="btn btn-primary  w-auto rounded text-center ms-3 me-3">
+        </div>   
+       </form>
+      
+   </div>
+ 
+{% endblock content %}
